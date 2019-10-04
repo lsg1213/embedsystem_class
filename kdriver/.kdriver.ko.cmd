@@ -1,1 +1,0 @@
-cmd_/cygdrive/c/AndroXStudio/workspace/kdriver/kdriver.ko := arm-linux-androideabi-ld -EL -r                                   -T /platform/linux/scripts/module-common.lds --build-id   -o /cygdrive/c/AndroXStudio/workspace/kdriver/kdriver.ko /cygdrive/c/AndroXStudio/workspace/kdriver/kdriver.o /cygdrive/c/AndroXStudio/workspace/kdriver/kdriver.mod.o
