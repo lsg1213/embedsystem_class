@@ -181,7 +181,7 @@ static ssize_t base7segment_write(struct file * file, const char * buf, size_t l
 	for (i=0; i<8; i++) {
 		gpio_direction_output(EXYNOS4_GPL0(i), (unsigned int)ibuf[i]);
 	}
-	mdelay(100);
+	mdelay(1000);
 
 	Getsegmentcode_base((unsigned int) data[1]);
 	gpio_direction_output(EXYNOS4_GPC0(0), 1);
