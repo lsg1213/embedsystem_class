@@ -1,17 +1,17 @@
-package edu.skku.sm5baseled_jnidriver;
+package edu.skku.fpgaled_jnidriver;
 
-public class BaseLed_JNIDriver {
+public class fpgaled_JNIDriver {
 	private boolean mConnectFlag;
 
 	static {
-		System.loadLibrary("BaseLed_JNIDriver");
+		System.loadLibrary("fpgaled_JNIDriver");
 	}
 		
 	private native static int openDriver(String path);
 	private native static void closeDriver();
 	private native static void writeDriver(byte[] data, int length);
 
-	public BaseLed_JNIDriver(){
+	public fpgaled_JNIDriver(){
 		mConnectFlag = false;
 	}
 	public int open(String driver){
@@ -41,6 +41,5 @@ public class BaseLed_JNIDriver {
 
 		writeDriver(data, data.length);
 	}
-	}
-
+}
 
