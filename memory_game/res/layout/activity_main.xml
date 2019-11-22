@@ -9,25 +9,6 @@
     tools:context="edu.skku.memory_game.MainActivity" >
 
     <ImageButton
-        android:id="@+id/ImageButton03"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageButton02"
-        android:layout_below="@+id/ImageButton02"
-        android:layout_marginTop="81dp"
-        android:padding="0dp"
-        android:src="@drawable/button_1" />
-
-    <ImageButton
-        android:id="@+id/ImageButton04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageButton01"
-        android:layout_alignTop="@+id/ImageButton03"
-        android:padding="0dp"
-        android:src="@drawable/button_1" />
-
-    <ImageButton
         android:id="@+id/ImageButton01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,16 +16,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="63dp"
         android:layout_marginTop="144dp"
-        android:padding="0dp"
-        android:src="@drawable/button_1" />
-
-    <ImageButton
-        android:id="@+id/ImageButton02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ImageButton01"
-        android:layout_marginLeft="63dp"
-        android:layout_toRightOf="@+id/ImageButton01"
         android:padding="0dp"
         android:src="@drawable/button_1" />
 
@@ -65,5 +36,43 @@
         android:layout_alignBottom="@+id/start"
         android:layout_alignLeft="@+id/ImageButton02"
         android:text="reset" />
+
+    <ImageButton
+        android:id="@+id/ImageButton04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ImageButton02"
+        android:layout_alignTop="@+id/ImageButton03"
+        android:padding="0dp"
+        android:src="@drawable/button_1" />
+
+    <ImageButton
+        android:id="@+id/ImageButton03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ImageButton01"
+        android:layout_marginTop="77dp"
+        android:layout_toLeftOf="@+id/ImageButton02"
+        android:padding="0dp"
+        android:src="@drawable/button_1" />
+
+    <ImageButton
+        android:id="@+id/ImageButton02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ImageButton03"
+        android:layout_marginLeft="70dp"
+        android:layout_toRightOf="@+id/ImageButton01"
+        android:padding="0dp"
+        android:src="@drawable/button_1" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:layout_toLeftOf="@+id/ImageButton04"
+        android:text="submit" />
     
 </RelativeLayout>
