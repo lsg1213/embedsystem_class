@@ -39,7 +39,7 @@ static unsigned short *full_led_addr[4][3];
 
 static int numOfLed = -1;
 
-static int fpga_fullcolorled_open(struct inode * inode, struct file * file)
+static int sjl_fpgafullcolorled_open(struct inode * inode, struct file * file)
 {
 	if(fullled_usage != 0) return -EBUSY;
 
@@ -48,7 +48,7 @@ static int fpga_fullcolorled_open(struct inode * inode, struct file * file)
 	if(!check_mem_region((unsigned long)fullled_ioremap, FULLCOLORLED_ADDRESS_RANGE)) {
 		request_mem_region((unsigned long)fullled_ioremap, FULLCOLORLED_ADDRESS_RANGE, FULLCOLORLED_NAME);
 	}
-	else	printk("driver: unable to register this!\n");
+	else printk("driver: unable to register this!\n");
 
 
 	full_led_addr[0][0] =(unsigned short *)((unsigned long)fullled_ioremap+0xa0);
@@ -71,7 +71,7 @@ static int fpga_fullcolorled_open(struct inode * inode, struct file * file)
 	return 0;
 }
 
-static int fpga_fullcolorled_release(struct inode * inode, struct file * file)
+static int sjl_fpgafullcolorled_release(struct inode * inode, struct file * file)
 {
 	iounmap(fullled_ioremap);
 
@@ -80,12 +80,12 @@ static int fpga_fullcolorled_release(struct inode * inode, struct file * file)
 	return 0;
 }
 
-static ssize_t fpga_fullcolorled_write(struct file * file, const char * buf, size_t length, loff_t * ofs)
+static ssize_t sjl_fpgafullcolorled_write(struct file * file, const char * buf, size_t length, loff_t * ofs)
 {
 	int ret,i=0,j=0;
 	unsigned char data[3];
 
-	printk("fpga_fullcolorled_write, \n");
+	printk("sjl_fpgafullcolorled_write, \n");
 	ret = copy_from_user(data,buf,length);
 	for(j=0;j<3;j++)
 	{
@@ -116,8 +116,8 @@ static ssize_t fpga_fullcolorled_write(struct file * file, const char * buf, siz
 	return length;
 }
 
-//static DEFINE_MUTEX(fpga_fullcolorled_mutex);
-static long fpga_fullcolorled_ioctl(struct file * file, unsigned int cmd, unsigned long arg){
+//static DEFINE_MUTEX(sjl_fpgafullcolorled_mutex);
+static long sjl_fpgafullcolorled_ioctl(struct file * file, unsigned int cmd, unsigned long arg){
 	switch(cmd)
 	{
 		case FULL_LED1:
@@ -137,41 +137,41 @@ static long fpga_fullcolorled_ioctl(struct file * file, unsigned int cmd, unsign
 			break;
 	}
 
-//	mutex_unlock(&fpga_fullcolorled_mutex);
+//	mutex_unlock(&sjl_fpgafullcolorled_mutex);
 	return 0;
 }
 
 
-static struct file_operations fpga_fullcolorled_fops = {
+static struct file_operations sjl_fpgafullcolorled_fops = {
 	.owner = THIS_MODULE,
-	.open = fpga_fullcolorled_open,
-	.release = fpga_fullcolorled_release,
-//	.read = fpga_fullcolorled_read,
-	.write = fpga_fullcolorled_write,
-	.unlocked_ioctl = fpga_fullcolorled_ioctl,
+	.open = sjl_fpgafullcolorled_open,
+	.release = sjl_fpgafullcolorled_release,
+//	.read = sjl_fpgafullcolorled_read,
+	.write = sjl_fpgafullcolorled_write,
+	.unlocked_ioctl = sjl_fpgafullcolorled_ioctl,
 };
 
-static struct miscdevice fpga_fullcolorled_driver = {
+static struct miscdevice sjl_fpgafullcolorled_driver = {
 	.minor = MISC_DYNAMIC_MINOR,
-	.name = "fpga_fullcolorled",
-	.fops = &fpga_fullcolorled_fops,
+	.name = "sjl_fpgafullcolorled",
+	.fops = &sjl_fpgafullcolorled_fops,
 };
 
-static int fpga_fullcolorled_init(void){
-	printk("fpga_fullcolorled_init, \n");
+static int sjl_fpgafullcolorled_init(void){
+	printk("sjl_fpgafullcolorled_init, \n");
 	
-	return misc_register(&fpga_fullcolorled_driver);
+	return misc_register(&sjl_fpgafullcolorled_driver);
 }
 
-static void fpga_fullcolorled_exit(void){
-	printk("fpga_fullcolorled_exit, \n");
+static void sjl_fpgafullcolorled_exit(void){
+	printk("sjl_fpgafullcolorled_exit, \n");
 
-	misc_deregister(&fpga_fullcolorled_driver);
+	misc_deregister(&sjl_fpgafullcolorled_driver);
 	
 }
 
-module_init(fpga_fullcolorled_init);
-module_exit(fpga_fullcolorled_exit);
+module_init(sjl_fpgafullcolorled_init);
+module_exit(sjl_fpgafullcolorled_exit);
 
 MODULE_AUTHOR("Hanback");
 MODULE_DESCRIPTION("fpga_fullcolorled driver test");
