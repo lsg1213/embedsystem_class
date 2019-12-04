@@ -1,9 +1,9 @@
 package edu.skku.memorygame;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import edu.skku.memorygame_fpgadotmatrix_jni.fpgadotmatrixJNIDriver;
 import edu.skku.memorygame_fpgafullcolorled_jnidriver.fpgafullcolorledJNIDriver;
 import edu.skku.memorygame_fpgalcd_jnidriver.fpgalcdJNIDriver;
 
@@ -30,6 +31,10 @@ class ComparatorMyIntSort implements Comparator<Integer> {
 
 @SuppressLint("HandlerLeak")
 public class MainActivity extends Activity {
+	public static final int SEND_INFORMATION = 0;
+	public static final int SEND_STOP = 1;
+	Thread thread;
+
 	Button start;
 	boolean started = false;
 	Button reset;
@@ -44,10 +49,14 @@ public class MainActivity extends Activity {
 	int clickNum = 0;
 	int stage = 0;
 	int score = 0;
-	TimeCountThread timeChecker;
 	// jnidriver list
 	private fpgalcdJNIDriver lcdDriver = new fpgalcdJNIDriver();
 	private fpgafullcolorledJNIDriver fullcolorledDriver = new fpgafullcolorledJNIDriver();
+	private fpgadotmatrixJNIDriver dotmatrixDriver = new fpgadotmatrixJNIDriver(); // dot
+	TimeCountThread timeChecker;
+	public boolean success;
+
+	// 7segment: 현재 기록
 
 	private void timeDelay(long mill) {
 		long st = System.currentTimeMillis();
@@ -58,12 +67,14 @@ public class MainActivity extends Activity {
 
 	public void generateState(int stage) {
 		state = new int[stage];
-		long term = 300;
+		long term = 500;
 		for (int i = 0; i < stage; i++) {
 			state[i] = (int) (Math.random() * 4) + 1;
 		}
 		final int randomColor[] = { 0, 0, 0 };
-
+		timeChecker = new TimeCountThread();
+		timeChecker.setDaemon(true);
+		timeChecker.start();
 		final int FULL_LED1 = 9;
 		final int FULL_LED2 = 8;
 		final int FULL_LED3 = 7;
@@ -107,16 +118,15 @@ public class MainActivity extends Activity {
 
 	public void stageReady(int stage) {
 		generateState(stage);
-//		Toast.makeText(getApplicationContext(),
-//				Arrays.toString(state).replaceAll("[^0-9]", ""),
-//				Toast.LENGTH_SHORT).show();
-		timeChecker = new TimeCountThread();
-		timeChecker.setDaemon(true);
-		timeChecker.start();
+		// Toast.makeText(getApplicationContext(),
+		// Arrays.toString(state).replaceAll("[^0-9]", ""),
+		// Toast.LENGTH_SHORT).show();
 	}
 
 	private void scoreboardSet() {
 		scoreBoard.add(score);
+		timeChecker.Stop();
+		timeChecker = null;
 		Collections.sort(scoreBoard);
 		Collections.reverse(scoreBoard);
 		final String str1 = "1st: " + String.valueOf((int) scoreBoard.get(0));
@@ -239,7 +249,7 @@ public class MainActivity extends Activity {
 				if (!startCheck())
 					return;
 				boolean success = false;
-				timeChecker.interrupt();
+				timeChecker.Stop();
 				for (int i = 0; i < stage; i++) {
 					if (input[i] != state[i]) {
 						break;
@@ -248,11 +258,11 @@ public class MainActivity extends Activity {
 						success = true;
 					}
 				}
-
 				input = null;
 				state = null;
 				score = stage - 1;
 				if (!success) {
+
 					Toast.makeText(getApplicationContext(), "Game Over",
 							Toast.LENGTH_SHORT).show();
 					Toast.makeText(getApplicationContext(),
@@ -276,40 +286,34 @@ public class MainActivity extends Activity {
 	class TimeCountThread extends Thread {
 
 		int time = 30;
+		boolean stopped = false;
 
 		public TimeCountThread() {
 			// TimeCountThread 를 등록할 때 쓰임
 		}
-
+		
+		public void Stop() {
+			stopped = true;
+		}
 		public void run() {
-			while (time >= 0) {
-				if (time == 0) {
-					finish();
-				} else {
-					timeCountHandler.sendEmptyMessage(time);
-				}
+			
+			while (time >= 0 && !stopped) {
 
-				try {
-					Thread.sleep(1000);
-					time--;
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				// 시간을 1초 보낸다
+				
+				timeDelay(1000);
+				dotmatrixDriver.DotMatrixControl(String.valueOf(time--));
+				if (success) {
 					break;
 				}
 			}
-			
 		}
-
-		// 시간을 화면에 표시하는 핸들러
-		private Handler timeCountHandler = new Handler() {
-
-			@Override
-			public void handleMessage(Message msg) {
-				super.handleMessage(msg);
-
-				Toast.makeText(getApplicationContext(), String.valueOf(time), 1000).show();
-			}
-		};
+		private void timeDelay(long mill) {
+			long st = System.currentTimeMillis();
+			while (System.currentTimeMillis() <= st + mill || success)
+				;
+			return;
+		}
 	}
 
 	@Override
@@ -318,6 +322,7 @@ public class MainActivity extends Activity {
 		if (fullcolorledDriver.open("/dev/sjl_fpgafullcolorled") < 0)
 			Toast.makeText(MainActivity.this, "LED_Driver Open Failed",
 					Toast.LENGTH_SHORT).show();
+
 		super.onResume();
 	}
 
@@ -327,4 +332,5 @@ public class MainActivity extends Activity {
 		fullcolorledDriver.close();
 		super.onPause();
 	}
+
 }

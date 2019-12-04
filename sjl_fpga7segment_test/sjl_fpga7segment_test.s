@@ -162,7 +162,7 @@ readch:
 main:
 	@ args = 0, pretend = 0, frame = 40
 	@ frame_needed = 0, uses_anonymous_args = 0
-	ldr	r0, .L84
+	ldr	r0, .L80
 	movw	r1, #4098
 	stmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, lr}
 	sub	sp, sp, #44
@@ -172,59 +172,59 @@ main:
 	str	r5, [sp, #20]
 	bl	open(PLT)
 	subs	r4, r0, #0
-	blt	.L81
-	ldr	r5, .L84+4
+	blt	.L77
+	ldr	r5, .L80+4
 	bl	init_keyboard(PLT)
-	ldr	r3, .L84+8
+	ldr	r3, .L80+8
 .LPIC18:
 	add	r5, pc, r5
-	ldr	r9, .L84+12
-.LPIC46:
+	ldr	r9, .L80+12
+.LPIC36:
 	add	r3, pc, r3
 	str	r3, [sp]
 	mov	r0, r5
-	ldr	fp, .L84+16
+	ldr	fp, .L80+16
 	bl	puts(PLT)
-	ldr	r0, .L84+20
-.LPIC43:
+	ldr	r0, .L80+20
+.LPIC33:
 	add	r9, pc, r9
-.LPIC44:
+.LPIC34:
 	add	fp, pc, fp
 .LPIC19:
 	add	r0, pc, r0
 	bl	puts(PLT)
 	mov	r0, r5
 	bl	puts(PLT)
-	ldr	r0, .L84+24
+	ldr	r0, .L80+24
 .LPIC21:
 	add	r0, pc, r0
 	bl	puts(PLT)
-	ldr	r0, .L84+28
+	ldr	r0, .L80+28
 .LPIC22:
 	add	r0, pc, r0
 	bl	puts(PLT)
-	ldr	r0, .L84+32
+	ldr	r0, .L80+32
 .LPIC23:
 	add	r0, pc, r0
 	bl	puts(PLT)
 	mov	r0, r5
 	bl	puts(PLT)
-	ldr	r0, .L84+36
+	ldr	r0, .L80+36
 	mov	r1, #0
-	ldr	r3, .L84+40
+	ldr	r3, .L80+40
 .LPIC25:
 	add	r0, pc, r0
 	mov	r2, r1
-.LPIC47:
+.LPIC37:
 	add	r3, pc, r3
 	str	r3, [sp, #4]
 	bl	printf(PLT)
-	ldr	r3, .L84+44
-.LPIC48:
+	ldr	r3, .L80+44
+.LPIC38:
 	add	r3, pc, r3
 	str	r3, [sp, #8]
-	ldr	r3, .L84+48
-.LPIC49:
+	ldr	r3, .L80+48
+.LPIC39:
 	add	r3, pc, r3
 	str	r3, [sp, #12]
 .L24:
@@ -239,18 +239,18 @@ main:
 	beq	.L26
 	cmp	r0, #99
 	bne	.L24
-	ldr	r0, .L84+52
+	ldr	r0, .L80+52
 	add	r6, sp, #40
-	ldr	r5, .L84+56
-.LPIC33:
+	ldr	r5, .L80+56
+.LPIC40:
 	add	r0, pc, r0
 	bl	printf(PLT)
-.LPIC35:
+.LPIC42:
 	add	r5, pc, r5
 	bl	close_keyboard(PLT)
-	ldr	r0, .L84+60
+	ldr	r0, .L80+60
 	add	r1, sp, #20
-.LPIC34:
+.LPIC41:
 	add	r0, pc, r0
 	bl	scanf(PLT)
 	bl	init_keyboard(PLT)
@@ -258,26 +258,26 @@ main:
 	mov	r0, r5
 	str	r3, [r6, #-16]!
 	bl	puts(PLT)
-	ldr	r0, .L84+64
-.LPIC36:
+	ldr	r0, .L80+64
+.LPIC43:
 	add	r0, pc, r0
 	bl	puts(PLT)
 	mov	r0, r5
 	bl	puts(PLT)
-	ldr	r0, .L84+68
-.LPIC38:
+	ldr	r0, .L80+68
+.LPIC45:
 	add	r0, pc, r0
 	bl	puts(PLT)
-	ldr	r0, .L84+72
-.LPIC39:
+	ldr	r0, .L80+72
+.LPIC46:
 	add	r0, pc, r0
 	bl	puts(PLT)
-	ldr	r0, .L84+76
-.LPIC40:
+	ldr	r0, .L80+76
+.LPIC47:
 	add	r0, pc, r0
 	bl	puts(PLT)
-	ldr	r0, .L84+80
-.LPIC41:
+	ldr	r0, .L80+80
+.LPIC48:
 	add	r0, pc, r0
 	bl	puts(PLT)
 	mov	r0, r5
@@ -289,48 +289,48 @@ main:
 	bl	ioctl(PLT)
 .L50:
 	cmp	r7, #99
-	beq	.L77
+	beq	.L73
 	cmp	r7, #114
-	beq	.L75
+	beq	.L71
 	cmp	r7, #112
-	beq	.L78
+	beq	.L74
 .L33:
 	bl	kbhit(PLT)
 	cmp	r0, #0
-	bne	.L82
-.L36:
+	bne	.L78
+.L35:
 	cmp	r7, #113
 	bne	.L50
 .L30:
-	ldr	r5, .L84+84
+	ldr	r5, .L80+84
 .LPIC26:
 	add	r5, pc, r5
 	mov	r0, r5
 	bl	puts(PLT)
-	ldr	r0, .L84+88
+	ldr	r0, .L80+88
 .LPIC27:
 	add	r0, pc, r0
 	bl	puts(PLT)
 	mov	r0, r5
 	bl	puts(PLT)
-	ldr	r0, .L84+92
+	ldr	r0, .L80+92
 .LPIC29:
 	add	r0, pc, r0
 	bl	puts(PLT)
-	ldr	r0, .L84+96
+	ldr	r0, .L80+96
 .LPIC30:
 	add	r0, pc, r0
 	bl	puts(PLT)
-	ldr	r0, .L84+100
+	ldr	r0, .L80+100
 .LPIC31:
 	add	r0, pc, r0
 	bl	puts(PLT)
 	mov	r0, r5
 	bl	puts(PLT)
 	b	.L24
-.L37:
+.L36:
 	mov	r7, #99
-.L77:
+.L73:
 	ldr	r3, [sp, #24]
 	cmp	r3, #0
 	ble	.L30
@@ -347,46 +347,42 @@ main:
 	str	r3, [sp, #24]
 	bl	kbhit(PLT)
 	cmp	r0, #0
-	beq	.L36
-.L82:
+	beq	.L35
+.L78:
 	bl	readch(PLT)
 	sub	r0, r0, #99
 	cmp	r0, #15
 	addls	pc, pc, r0, asl #2
+	b	.L35
+.L37:
 	b	.L36
-.L38:
-	b	.L37
-	b	.L36
-	b	.L36
-	b	.L36
-	b	.L36
-	b	.L36
-	b	.L36
-	b	.L36
-	b	.L36
-	b	.L36
-	b	.L36
-	b	.L36
-	b	.L36
-	b	.L55
+	b	.L35
+	b	.L35
+	b	.L35
+	b	.L35
+	b	.L35
+	b	.L35
+	b	.L35
+	b	.L35
+	b	.L35
+	b	.L35
+	b	.L35
+	b	.L35
+	b	.L54
 	b	.L30
-	b	.L75
-.L75:
+	b	.L71
+.L71:
 	ldr	r3, [sp, #20]
 	mov	r7, #99
 	str	r3, [sp, #24]
 	b	.L33
-.L55:
+.L54:
 	mov	r7, #112
-.L78:
-	mov	r5, #14
-.L35:
+.L74:
 	mov	r0, r4
 	mov	r1, r6
 	mov	r2, #4
 	bl	write(PLT)
-	subs	r5, r5, #1
-	bne	.L35
 	b	.L33
 .L23:
 	mov	r0, #0
@@ -418,26 +414,26 @@ main:
 	mov	r5, #99
 	movw	r10, #10000
 	mov	r8, #100
-.L51:
+.L49:
 	cmp	r5, #99
-	beq	.L83
-.L44:
-	cmp	r5, #112
 	beq	.L79
-.L45:
+.L43:
+	cmp	r5, #112
+	beq	.L75
+.L44:
 	bl	kbhit(PLT)
 	cmp	r0, #0
-	beq	.L51
+	beq	.L49
 	bl	readch(PLT)
 	cmp	r0, #112
-	beq	.L56
+	beq	.L55
 	cmp	r0, #113
 	beq	.L24
 	cmp	r0, #99
 	moveq	r5, #99
 	cmp	r5, #99
-	bne	.L44
-.L83:
+	bne	.L43
+.L79:
 	mov	r1, #0
 	mov	r0, r6
 	bl	gettimeofday(PLT)
@@ -455,46 +451,46 @@ main:
 	add	r3, r3, ip
 	str	r3, [sp, #28]
 	bl	write(PLT)
-	b	.L45
-.L56:
+	b	.L44
+.L55:
 	mov	r5, r0
-.L79:
+.L75:
 	mov	r0, r4
 	mov	r1, r7
 	mov	r2, #4
 	bl	write(PLT)
-	b	.L45
-.L81:
-	ldr	r0, .L84+104
+	b	.L44
+.L77:
+	ldr	r0, .L80+104
 .LPIC17:
 	add	r0, pc, r0
 	bl	puts(PLT)
 	mov	r0, r5
 	bl	exit(PLT)
-.L85:
+.L81:
 	.align	2
-.L84:
+.L80:
 	.word	.LC0-(.LPIC16+8)
 	.word	.LC2-(.LPIC18+8)
-	.word	.LC12-(.LPIC46+8)
-	.word	.LC14-(.LPIC43+8)
-	.word	.LC15-(.LPIC44+8)
+	.word	.LC10-(.LPIC36+8)
+	.word	.LC8-(.LPIC33+8)
+	.word	.LC9-(.LPIC34+8)
 	.word	.LC3-(.LPIC19+8)
 	.word	.LC4-(.LPIC21+8)
 	.word	.LC5-(.LPIC22+8)
 	.word	.LC6-(.LPIC23+8)
 	.word	.LC7-(.LPIC25+8)
-	.word	.LC11-(.LPIC47+8)
-	.word	.LC6-(.LPIC48+8)
-	.word	.LC16-(.LPIC49+8)
-	.word	.LC8-(.LPIC33+8)
-	.word	.LC2-(.LPIC35+8)
-	.word	.LC9-(.LPIC34+8)
-	.word	.LC10-(.LPIC36+8)
-	.word	.LC11-(.LPIC38+8)
+	.word	.LC11-(.LPIC37+8)
+	.word	.LC6-(.LPIC38+8)
 	.word	.LC12-(.LPIC39+8)
 	.word	.LC13-(.LPIC40+8)
-	.word	.LC6-(.LPIC41+8)
+	.word	.LC2-(.LPIC42+8)
+	.word	.LC14-(.LPIC41+8)
+	.word	.LC15-(.LPIC43+8)
+	.word	.LC11-(.LPIC45+8)
+	.word	.LC10-(.LPIC46+8)
+	.word	.LC16-(.LPIC47+8)
+	.word	.LC6-(.LPIC48+8)
 	.word	.LC2-(.LPIC26+8)
 	.word	.LC3-(.LPIC27+8)
 	.word	.LC4-(.LPIC29+8)
@@ -533,30 +529,30 @@ peek_character:
 	.ascii	"input %d %c\012\000"
 	.space	3
 .LC8:
-	.ascii	"input counter value (0:exit program, 99~01) : \000"
+	.ascii	" -------------------------------------\000"
 	.space	1
 .LC9:
-	.ascii	"%d\000"
+	.ascii	"   System Time\000"
 	.space	1
 .LC10:
-	.ascii	"   Counter\000"
-	.space	1
+	.ascii	"   [c] continue\000"
 .LC11:
 	.ascii	"   [p] pause\000"
 	.space	3
 .LC12:
-	.ascii	"   [c] continue\000"
+	.ascii	" -----------------------------------\012\000"
+	.space	2
 .LC13:
-	.ascii	"   [r] reset\000"
-	.space	3
+	.ascii	"input counter value (0:exit program, 99~01) : \000"
+	.space	1
 .LC14:
-	.ascii	" -------------------------------------\000"
+	.ascii	"%d\000"
 	.space	1
 .LC15:
-	.ascii	"   System Time\000"
+	.ascii	"   Counter\000"
 	.space	1
 .LC16:
-	.ascii	" -----------------------------------\012\000"
+	.ascii	"   [r] reset\000"
 	.bss
 	.align	2
 .LANCHOR0 = . + 0

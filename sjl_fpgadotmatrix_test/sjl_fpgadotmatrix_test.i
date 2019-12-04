@@ -1,6 +1,6 @@
-# 1 "sjl_fpga7segment_test.c"
+# 1 "sjl_fpgadotmatrix_test.c"
 # 1 "<command-line>"
-# 1 "sjl_fpga7segment_test.c"
+# 1 "sjl_fpgadotmatrix_test.c"
 # 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/unistd.h" 1
 # 31 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/unistd.h"
 # 1 "c:\\androxstudio\\legacy\\ndk\\toolchains\\arm-linux-androideabi-4.8\\prebuilt\\windows\\lib\\gcc\\arm-linux-androideabi\\4.8\\include\\stddef.h" 1 3 4
@@ -917,7 +917,47 @@ extern pid_t tcgetpgrp(int fd);
 extern int tcsetpgrp(int fd, pid_t _pid);
 # 210 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/unistd.h"
 
-# 2 "sjl_fpga7segment_test.c" 2
+# 2 "sjl_fpgadotmatrix_test.c" 2
+# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/fcntl.h" 1
+# 33 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/fcntl.h"
+# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/linux/fcntl.h" 1
+# 15 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/linux/fcntl.h"
+# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/fcntl.h" 1
+# 20 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/fcntl.h"
+# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm-generic/fcntl.h" 1
+# 117 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm-generic/fcntl.h"
+struct flock {
+ short l_type;
+ short l_whence;
+ off_t l_start;
+ off_t l_len;
+ pid_t l_pid;
+
+};
+# 138 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm-generic/fcntl.h"
+struct flock64 {
+ short l_type;
+ short l_whence;
+ loff_t l_start;
+ loff_t l_len;
+ pid_t l_pid;
+
+};
+# 21 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/fcntl.h" 2
+# 16 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/linux/fcntl.h" 2
+# 34 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/fcntl.h" 2
+
+
+
+# 46 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/fcntl.h"
+extern int open(const char* path, int mode, ...);
+extern int openat(int fd, const char* path, int mode, ...);
+extern int unlinkat(int dirfd, const char *pathname, int flags);
+extern int fcntl(int fd, int command, ...);
+extern int creat(const char* path, mode_t mode);
+
+
+# 3 "sjl_fpgadotmatrix_test.c" 2
 # 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/stdlib.h" 1
 # 37 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/stdlib.h"
 # 1 "c:\\androxstudio\\legacy\\ndk\\toolchains\\arm-linux-androideabi-4.8\\prebuilt\\windows\\lib\\gcc\\arm-linux-androideabi\\4.8\\include\\stddef.h" 1 3 4
@@ -1079,7 +1119,7 @@ extern int wctomb(char *, wchar_t);
 extern size_t wcstombs(char *, const wchar_t *, size_t);
 # 186 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/stdlib.h"
 
-# 3 "sjl_fpga7segment_test.c" 2
+# 4 "sjl_fpgadotmatrix_test.c" 2
 # 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/stdio.h" 1
 # 46 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/stdio.h"
 # 1 "c:\\androxstudio\\legacy\\ndk\\toolchains\\arm-linux-androideabi-4.8\\prebuilt\\windows\\lib\\gcc\\arm-linux-androideabi\\4.8\\include\\stdarg.h" 1 3 4
@@ -1302,470 +1342,159 @@ static __inline int __sputc(int _c, FILE *_p) {
  else
   return (__swbuf(_c, _p));
 }
-# 4 "sjl_fpga7segment_test.c" 2
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/fcntl.h" 1
-# 33 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/fcntl.h"
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/linux/fcntl.h" 1
-# 15 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/linux/fcntl.h"
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/fcntl.h" 1
-# 20 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/fcntl.h"
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm-generic/fcntl.h" 1
-# 117 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm-generic/fcntl.h"
-struct flock {
- short l_type;
- short l_whence;
- off_t l_start;
- off_t l_len;
- pid_t l_pid;
+# 5 "sjl_fpgadotmatrix_test.c" 2
+# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/assert.h" 1
+# 62 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/assert.h"
+
+ void __assert(const char *, int, const char *);
+ void __assert2(const char *, int, const char *, const char *);
+
+# 6 "sjl_fpgadotmatrix_test.c" 2
+# 1 "font.h" 1
+int font[95][5] = {
+    { 0x00, 0x00, 0x00, 0x00, 0x00 },
+    { 0x00, 0x00, 0x4f, 0x00, 0x00 },
+    { 0x00, 0x07, 0x00, 0x07, 0x00 },
+    { 0x14, 0x7f, 0x14, 0x7f, 0x14 },
+    { 0x24, 0x2a, 0x7f, 0x2a, 0x12 },
+    { 0x23, 0x13, 0x08, 0x64, 0x62 },
+    { 0x36, 0x49, 0x55, 0x22, 0x50 },
+    { 0x00, 0x05, 0x03, 0x00, 0x00 },
+    { 0x00, 0x1c, 0x22, 0x41, 0x00 },
+    { 0x00, 0x41, 0x22, 0x1c, 0x00 },
+    { 0x14, 0x08, 0x3e, 0x08, 0x14 },
+    { 0x08, 0x08, 0x3e, 0x08, 0x08 },
+    { 0x00, 0x50, 0x30, 0x00, 0x00 },
+    { 0x08, 0x08, 0x08, 0x08, 0x08 },
+    { 0x00, 0x60, 0x60, 0x00, 0x00 },
+    { 0x20, 0x10, 0x08, 0x04, 0x02 },
+    { 0x3e, 0x51, 0x49, 0x45, 0x3e },
+    { 0x00, 0x42, 0x7f, 0x40, 0x00 },
+    { 0x42, 0x61, 0x51, 0x49, 0x46 },
+    { 0x21, 0x41, 0x45, 0x4b, 0x31 },
+    { 0x18, 0x14, 0x12, 0x7f, 0x10 },
+    { 0x27, 0x45, 0x45, 0x45, 0x39 },
+    { 0x3c, 0x4a, 0x49, 0x49, 0x30 },
+    { 0x01, 0x71, 0x09, 0x05, 0x03 },
+    { 0x36, 0x49, 0x49, 0x49, 0x36 },
+    { 0x06, 0x49, 0x49, 0x29, 0x1e },
+    { 0x00, 0x36, 0x36, 0x00, 0x00 },
+    { 0x00, 0x56, 0x36, 0x00, 0x00 },
+    { 0x08, 0x14, 0x22, 0x41, 0x00 },
+    { 0x14, 0x14, 0x14, 0x14, 0x14 },
+    { 0x00, 0x41, 0x22, 0x14, 0x08 },
+    { 0x02, 0x01, 0x51, 0x09, 0x06 },
+    { 0x32, 0x49, 0x79, 0x41, 0x3e },
+    { 0x7e, 0x11, 0x11, 0x11, 0x7e },
+    { 0x7f, 0x49, 0x49, 0x49, 0x36 },
+    { 0x3e, 0x41, 0x41, 0x41, 0x22 },
+    { 0x7f, 0x41, 0x41, 0x22, 0x1c },
+    { 0x7f, 0x49, 0x49, 0x49, 0x41 },
+    { 0x7f, 0x09, 0x09, 0x09, 0x01 },
+    { 0x3e, 0x41, 0x49, 0x49, 0x7a },
+    { 0x7f, 0x08, 0x08, 0x08, 0x7f },
+    { 0x00, 0x41, 0x7f, 0x41, 0x00 },
+    { 0x20, 0x40, 0x41, 0x3f, 0x01 },
+    { 0x7f, 0x08, 0x14, 0x22, 0x41 },
+    { 0x7f, 0x40, 0x40, 0x40, 0x40 },
+    { 0x7f, 0x02, 0x0c, 0x02, 0x7f },
+    { 0x7f, 0x04, 0x08, 0x10, 0x7f },
+    { 0x3e, 0x41, 0x41, 0x41, 0x3e },
+    { 0x7f, 0x09, 0x09, 0x09, 0x06 },
+    { 0x3e, 0x41, 0x51, 0x21, 0x5e },
+    { 0x7f, 0x09, 0x19, 0x29, 0x46 },
+    { 0x26, 0x49, 0x49, 0x49, 0x32 },
+    { 0x01, 0x01, 0x7f, 0x01, 0x01 },
+    { 0x3f, 0x40, 0x40, 0x40, 0x3f },
+    { 0x1f, 0x20, 0x40, 0x20, 0x1f },
+    { 0x3f, 0x40, 0x38, 0x40, 0x3f },
+    { 0x63, 0x14, 0x08, 0x14, 0x63 },
+    { 0x07, 0x08, 0x70, 0x08, 0x07 },
+    { 0x61, 0x51, 0x49, 0x45, 0x43 },
+    { 0x00, 0x7f, 0x41, 0x41, 0x00 },
+    { 0x02, 0x04, 0x08, 0x10, 0x20 },
+    { 0x00, 0x41, 0x41, 0x7f, 0x00 },
+    { 0x04, 0x02, 0x01, 0x02, 0x04 },
+    { 0x40, 0x40, 0x40, 0x40, 0x40 },
+    { 0x00, 0x01, 0x02, 0x04, 0x00 },
+    { 0x20, 0x54, 0x54, 0x54, 0x78 },
+    { 0x7f, 0x48, 0x44, 0x44, 0x38 },
+    { 0x38, 0x44, 0x44, 0x44, 0x20 },
+    { 0x38, 0x44, 0x44, 0x48, 0x7f },
+    { 0x38, 0x54, 0x54, 0x54, 0x18 },
+    { 0x08, 0x7e, 0x09, 0x01, 0x02 },
+    { 0x0c, 0x52, 0x52, 0x52, 0x3e },
+    { 0x7f, 0x08, 0x04, 0x04, 0x78 },
+    { 0x00, 0x04, 0x7d, 0x00, 0x00 },
+    { 0x20, 0x40, 0x44, 0x3d, 0x00 },
+    { 0x7f, 0x10, 0x28, 0x44, 0x00 },
+    { 0x00, 0x41, 0x7f, 0x40, 0x00 },
+    { 0x7c, 0x04, 0x18, 0x04, 0x7c },
+    { 0x7c, 0x08, 0x04, 0x04, 0x78 },
+    { 0x38, 0x44, 0x44, 0x44, 0x38 },
+    { 0x7c, 0x14, 0x14, 0x14, 0x08 },
+    { 0x08, 0x14, 0x14, 0x18, 0x7c },
+    { 0x7c, 0x08, 0x04, 0x04, 0x08 },
+    { 0x48, 0x54, 0x54, 0x54, 0x20 },
+    {0x04, 0x3f, 0x44, 0x40, 0x20},
+    {0x3c, 0x40, 0x40, 0x20, 0x7c},
+    {0x1c, 0x20, 0x40, 0x20, 0x1c},
+    {0x3c, 0x40, 0x30, 0x40, 0x3c},
+    {0x44, 0x28, 0x10, 0x28, 0x44},
+    {0x0c, 0x50, 0x50, 0x50, 0x3c},
+    {0x44, 0x64, 0x54, 0x4c, 0x44},
+    {0x00, 0x08, 0x36, 0x41, 0x00},
+    {0x00, 0x00, 0x77, 0x00, 0x00},
+    {0x00, 0x41, 0x36, 0x08, 0x00},
+    {0x08, 0x04, 0x08, 0x10, 0x08}};
+# 7 "sjl_fpgadotmatrix_test.c" 2
 
-};
-# 138 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm-generic/fcntl.h"
-struct flock64 {
- short l_type;
- short l_whence;
- loff_t l_start;
- loff_t l_len;
- pid_t l_pid;
+int main() {
+ int dev, i, j, offset = 20, ch, len;
+ char result[600], tmp[2], input[100];
 
-};
-# 21 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/fcntl.h" 2
-# 16 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/linux/fcntl.h" 2
-# 34 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/fcntl.h" 2
+ dev = open("/dev/sjl_fpga_dotmatrix", 00000001);
 
+ if (dev != -1) {
+  printf("Input text : ");
 
+  scanf("%s", input);
 
-# 46 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/fcntl.h"
-extern int open(const char* path, int mode, ...);
-extern int openat(int fd, const char* path, int mode, ...);
-extern int unlinkat(int dirfd, const char *pathname, int flags);
-extern int fcntl(int fd, int command, ...);
-extern int creat(const char* path, mode_t mode);
+  len = strlen(input);
 
+  for (j = 0; j < 20; j++)
+   result[j] = '0';
 
-# 5 "sjl_fpga7segment_test.c" 2
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/time.h" 1
-# 38 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/time.h"
+  for (i = 0; i < len; i++) {
+   ch = input[i];
 
+   ch -= 0x20;
 
-extern time_t time(time_t *);
-extern int nanosleep(const struct timespec *, struct timespec *);
+   for (j = 0; j < 5; j++) {
+    sprintf(tmp, "%x%x", font[ch][j] / 16, font[ch][j] % 16);
 
-extern char *strtotimeval(const char *str, struct timeval *tv);
+    result[offset++] = tmp[0];
+    result[offset++] = tmp[1];
+   }
+   result[offset++] = '0';
+   result[offset++] = '0';
+  }
 
-struct tm {
-   int tm_sec;
-   int tm_min;
-   int tm_hour;
-   int tm_mday;
-   int tm_mon;
-   int tm_year;
-   int tm_wday;
-   int tm_yday;
-   int tm_isdst;
+  for (j = 0; j < 20; j++)
+   result[offset++] = '0';
 
-   long int tm_gmtoff;
-   const char *tm_zone;
-
-};
-
-
-
-
-
-
-extern char* asctime(const struct tm* a);
-extern char* asctime_r(const struct tm* a, char* buf);
-
-
-extern double difftime (time_t __time1, time_t __time0) __attribute__((pcs("aapcs")));
-extern time_t mktime (struct tm *a);
-
-extern struct tm* localtime(const time_t *t);
-extern struct tm* localtime_r(const time_t *timep, struct tm *result);
-
-extern struct tm* gmtime(const time_t *timep);
-extern struct tm* gmtime_r(const time_t *timep, struct tm *result);
-
-extern char* strptime(const char *buf, const char *fmt, struct tm *tm);
-extern size_t strftime(char *s, size_t max, const char *format, const struct tm *tm);
-
-extern char *ctime(const time_t *timep);
-extern char *ctime_r(const time_t *timep, char *buf);
-
-extern void tzset(void);
-
-
-extern char* tzname[];
-extern int daylight;
-extern long int timezone;
-
-
-
-extern clock_t clock(void);
-
-
-extern int clock_getres(clockid_t, struct timespec *);
-extern int clock_gettime(clockid_t, struct timespec *);
-extern int clock_settime(clockid_t, const struct timespec *);
-extern int clock_nanosleep(clockid_t, int, const struct timespec *, struct timespec *);
-# 113 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/time.h"
-extern int timer_create(int, struct sigevent*, timer_t*);
-extern int timer_delete(timer_t);
-extern int timer_settime(timer_t timerid, int flags, const struct itimerspec *value, struct itimerspec *ovalue);
-extern int timer_gettime(timer_t timerid, struct itimerspec *value);
-extern int timer_getoverrun(timer_t timerid);
-
-
-# 6 "sjl_fpga7segment_test.c" 2
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/termio.h" 1
-# 32 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/termio.h"
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/termios.h" 1
-# 32 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/termios.h"
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/sys/ioctl.h" 1
-# 32 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/sys/ioctl.h"
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/linux/ioctl.h" 1
-# 15 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/linux/ioctl.h"
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/ioctl.h" 1
-# 12 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/ioctl.h"
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm-generic/ioctl.h" 1
-# 36 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm-generic/ioctl.h"
-extern unsigned int __invalid_size_argument_for_IOC;
-# 12 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/ioctl.h" 2
-# 16 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/linux/ioctl.h" 2
-# 33 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/sys/ioctl.h" 2
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/ioctls.h" 1
-# 15 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/ioctls.h"
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/ioctl.h" 1
-# 16 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/ioctls.h" 2
-# 34 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/sys/ioctl.h" 2
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/termbits.h" 1
-# 15 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/termbits.h"
-typedef unsigned char cc_t;
-typedef unsigned int speed_t;
-typedef unsigned int tcflag_t;
-
-
-struct termios {
- tcflag_t c_iflag;
- tcflag_t c_oflag;
- tcflag_t c_cflag;
- tcflag_t c_lflag;
- cc_t c_line;
- cc_t c_cc[19];
-};
-# 35 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/sys/ioctl.h" 2
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/sys/ioctl_compat.h" 1
-# 45 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/sys/ioctl_compat.h"
-struct tchars {
- char t_intrc;
- char t_quitc;
- char t_startc;
- char t_stopc;
- char t_eofc;
- char t_brkc;
-};
-
-struct ltchars {
- char t_suspc;
- char t_dsuspc;
- char t_rprntc;
- char t_flushc;
- char t_werasc;
- char t_lnextc;
-};
-
-
-
-
-
-
-struct sgttyb {
- char sg_ispeed;
- char sg_ospeed;
- char sg_erase;
- char sg_kill;
- short sg_flags;
-};
-# 36 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/sys/ioctl.h" 2
-
-
-
-extern int ioctl(int, int, ...);
-
-
-# 33 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/termios.h" 2
-
-
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/linux/termios.h" 1
-# 16 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/linux/termios.h"
-# 1 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/termios.h" 1
-# 18 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/asm/termios.h"
-struct winsize {
- unsigned short ws_row;
- unsigned short ws_col;
- unsigned short ws_xpixel;
- unsigned short ws_ypixel;
-};
-
-
-struct termio {
- unsigned short c_iflag;
- unsigned short c_oflag;
- unsigned short c_cflag;
- unsigned short c_lflag;
- unsigned char c_line;
- unsigned char c_cc[8];
-};
-# 17 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/linux/termios.h" 2
-# 36 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/termios.h" 2
-
-
-# 49 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/termios.h"
-static __inline__ int tcgetattr(int fd, struct termios *s)
-{
-    return ioctl(fd, 0x5401, s);
-}
-
-static __inline__ int tcsetattr(int fd, int __opt, const struct termios *s)
-{
-    return ioctl(fd, __opt, (void *)s);
-}
-
-static __inline__ int tcflow(int fd, int action)
-{
-    return ioctl(fd, 0x540A, (void *)(intptr_t)action);
-}
-
-static __inline__ int tcflush(int fd, int __queue)
-{
-    return ioctl(fd, 0x540B, (void *)(intptr_t)__queue);
-}
-
-static __inline__ pid_t tcgetsid(int fd)
-{
-    pid_t _pid;
-    return ioctl(fd, 0x5429, &_pid) ? (pid_t)-1 : _pid;
-}
-
-static __inline__ int tcsendbreak(int fd, int __duration)
-{
-    return ioctl(fd, 0x5425, (void *)(uintptr_t)__duration);
-}
-
-static __inline__ speed_t cfgetospeed(const struct termios *s)
-{
-    return (speed_t)(s->c_cflag & 0010017);
-}
-
-static __inline__ int cfsetospeed(struct termios *s, speed_t speed)
-{
-    s->c_cflag = (s->c_cflag & ~0010017) | (speed & 0010017);
-    return 0;
-}
-
-static __inline__ speed_t cfgetispeed(const struct termios *s)
-{
-    return (speed_t)(s->c_cflag & 0010017);
-}
-
-static __inline__ int cfsetispeed(struct termios *s, speed_t speed)
-{
-    s->c_cflag = (s->c_cflag & ~0010017) | (speed & 0010017);
-  return 0;
-}
-
-static __inline__ void cfmakeraw(struct termios *s)
-{
-    s->c_iflag &= ~(0000001|0000002|0000010|0000040|0000100|0000200|0000400|0002000);
-    s->c_oflag &= ~0000001;
-    s->c_lflag &= ~(0000010|0000100|0000002|0000001|0100000);
-    s->c_cflag &= ~(0000060|0000400);
-    s->c_cflag |= 0000060;
-}
-
-
-# 32 "C:/AndroXStudio/legacy/ndk/platforms/android-19/arch-arm/usr/include/termio.h" 2
-# 7 "sjl_fpga7segment_test.c" 2
-
-static struct termios initial_settings, new_settings;
-static int peek_character = -1;
-
-void init_keyboard() {
- tcgetattr(0, &initial_settings);
- new_settings = initial_settings;
- new_settings.c_lflag = ~0000002;
- new_settings.c_lflag = ~0000010;
- new_settings.c_cc[6] = 1;
- new_settings.c_cc[5] = 0;
- tcsetattr(0, 0x5402, &new_settings);
-}
-void close_keyboard() {
- tcsetattr(0, 0x5402, &initial_settings);
-}
-
-int kbhit() {
- char ch;
- int nread;
-
- if(peek_character != -1)
-  return 1;
- new_settings.c_cc[6] = 0;
- tcsetattr(0, 0x5402, &new_settings);
- nread = read(0, &ch, 1);
- new_settings.c_cc[6] = 1;
- tcsetattr(0, 0x5402, &new_settings);
- if(nread == 1) {
-  peek_character = ch;
-  return 1;
- }
- return 0;
-}
-int readch() {
- char ch;
-
- if(peek_character != -1) {
-  ch = peek_character;
-  peek_character = -1;
-  return ch;
- }
- read(0, &ch, 1);
- return ch;
-}
-int main(int argc, char * argv[]) {
- int fd, value = 1, count, clock, ch, i;
- unsigned short input, dir = 0;
-
- if ((fd = open("/dev/sjl_fpga7segment", 00000002 | 00010000)) < 0) {
-  printf("FND open fail\n");
+  for (i = 0; i < (offset - 18) / 2; i++) {
+   for (j = 0; j < 20; j++) {
+    write(dev, &result[2 * i], 20);
+   }
+  }
+ } else {
+  printf("Device Open ERROR!\n");
   exit(1);
  }
 
- init_keyboard();
+ close(dev);
+ printf("Program Exit !!\n");
 
- printf("-------------------------------\n");
- printf("   7Segment Program\n");
- printf("-------------------------------\n");
- printf("   [c] counter\n");
- printf("   [t] system time\n");
- printf("   [q] exit\n");
- printf("-------------------------------\n");
-
- printf("input %d %c\n", input, (char)input);
- while (input != 'q') {
-  input = 'r';
-  if(kbhit()) {
-   ch = readch();
-   switch(ch) {
-    case 'c': input = 'c'; break;
-    case 't': input = 't'; break;
-    case 'q' : input = 'q'; break;
-   }
-  }
-  switch(input) {
-  case 'c':
-   printf("input counter value (0:exit program, 99~01) : ");
-   close_keyboard();
-   scanf("%d", &value);
-   init_keyboard();
-   count = value;
-   printf("-------------------------------\n");
-   printf("   Counter\n");
-   printf("-------------------------------\n");
-   printf("   [p] pause\n");
-   printf("   [c] continue\n");
-   printf("   [r] reset\n");
-   printf("   [q] exit\n");
-   printf("-------------------------------\n");
-
-   ioctl(fd, 0, ((void *)0), ((void *)0));
-   dir = 'c';
-   while (dir != 'q') {
-    if (dir == 'c') {
-     if (count <= 0)
-      break;
-     for(i=0; i<14; i++ )
-      write(fd, &count, 4);
-     count--;
-    }
-    else if (dir == 'r') {
-     count = value;
-     dir = 'c';
-    }
-    else if (dir == 'p') {
-
-      write(fd, &count, 4);
-    }
-    if (kbhit()) {
-     ch = readch();
-     switch(ch) {
-     case 'c': dir = 'c'; break;
-     case 'p': dir = 'p'; break;
-     case 'r': dir = 'r'; break;
-     case 'q': dir = 'q'; break;
-     }
-    }
-   }
-
-  printf("-------------------------------\n");
-  printf("   7Segment Program\n");
-  printf("-------------------------------\n");
-  printf("   [c] counter\n");
-  printf("   [t] system time\n");
-  printf("   [q] exit\n");
-  printf("-------------------------------\n");
-  break;
-  case 't':
-  printf(" -------------------------------------\n");
-  printf("   System Time\n");
-  printf(" -------------------------------------\n");
-  printf("   [c] continue\n");
-  printf("   [p] pause\n");
-  printf("   [q] exit\n");
-  printf(" -----------------------------------\n\n");
-
-  struct timeval val;
-  struct tm *ptm;
-
-  ioctl(fd, 1, ((void *)0), ((void *)0));
-  dir = 'c';
-  while(dir != 'q') {
-    if(dir == 'c') {
-    gettimeofday(&val, ((void *)0));
-    ptm = localtime(&val.tv_sec);
-    clock = ptm->tm_hour * 10000 + ptm->tm_min * 100 + ptm->tm_sec;
-    write(fd, &clock, 4);
-    } else if( dir == 'p') {
-    write(fd, &clock, 4);
-    }
-
-    if(kbhit()) {
-     ch = readch();
-     switch(ch) {
-     case 'p': dir = 'p'; break;
-     case 'c': dir = 'c'; break;
-     case 'q': dir = 'q'; break;
-     }
-    }
-   }
-   while(dir != 'q') {
-    if(dir == 'c') {
-    gettimeofday(&val, ((void *)0));
-    ptm = localtime(&val.tv_sec);
-    clock = ptm->tm_hour * 10000 + ptm->tm_min * 100 + ptm->tm_sec;
-    write(fd, &clock, 4);
-    } else if( dir == 'p') {
-    write(fd, &clock, 4);
-    }
-
-    if(kbhit()) {
-     ch = readch();
-     switch(ch) {
-     case 'p': dir = 'p'; break;
-     case 'c': dir = 'c'; break;
-     case 'q': dir = 'q'; break;
-     }
-    }
-   }
-  }
- }
+ return 0;
 }
