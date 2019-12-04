@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import edu.skku.memorygame_fpga7segment_jni.fpga7segmentJNIDriver;
 import edu.skku.memorygame_fpgadotmatrix_jni.fpgadotmatrixJNIDriver;
 import edu.skku.memorygame_fpgafullcolorled_jnidriver.fpgafullcolorledJNIDriver;
 import edu.skku.memorygame_fpgalcd_jnidriver.fpgalcdJNIDriver;
@@ -53,6 +54,7 @@ public class MainActivity extends Activity {
 	private fpgalcdJNIDriver lcdDriver = new fpgalcdJNIDriver();
 	private fpgafullcolorledJNIDriver fullcolorledDriver = new fpgafullcolorledJNIDriver();
 	private fpgadotmatrixJNIDriver dotmatrixDriver = new fpgadotmatrixJNIDriver(); // dot
+	private fpga7segmentJNIDriver segmentDriver = new fpga7segmentJNIDriver();
 	TimeCountThread timeChecker;
 	public boolean success;
 
@@ -322,7 +324,7 @@ public class MainActivity extends Activity {
 		if (fullcolorledDriver.open("/dev/sjl_fpgafullcolorled") < 0)
 			Toast.makeText(MainActivity.this, "LED_Driver Open Failed",
 					Toast.LENGTH_SHORT).show();
-
+		segmentDriver.open();
 		super.onResume();
 	}
 
@@ -330,6 +332,7 @@ public class MainActivity extends Activity {
 	protected void onPause() {
 		lcdDriver.off();
 		fullcolorledDriver.close();
+		segmentDriver.close();
 		super.onPause();
 	}
 
