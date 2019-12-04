@@ -74,9 +74,7 @@ public class MainActivity extends Activity {
 			state[i] = (int) (Math.random() * 4) + 1;
 		}
 		final int randomColor[] = { 0, 0, 0 };
-		timeChecker = new TimeCountThread();
-		timeChecker.setDaemon(true);
-		timeChecker.start();
+		
 		final int FULL_LED1 = 9;
 		final int FULL_LED2 = 8;
 		final int FULL_LED3 = 7;
@@ -127,8 +125,7 @@ public class MainActivity extends Activity {
 
 	private void scoreboardSet() {
 		scoreBoard.add(score);
-		timeChecker.Stop();
-		timeChecker = null;
+		
 		Collections.sort(scoreBoard);
 		Collections.reverse(scoreBoard);
 		final String str1 = "1st: " + String.valueOf((int) scoreBoard.get(0));
@@ -165,6 +162,8 @@ public class MainActivity extends Activity {
 		reset = (Button) findViewById(R.id.reset);
 		submit = (Button) findViewById(R.id.submit);
 
+		
+		
 		start.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -172,6 +171,12 @@ public class MainActivity extends Activity {
 				if (started)
 					return;
 				started = true;
+				if (stage == 0) {
+					timeChecker = new TimeCountThread();
+					timeChecker.setDaemon(true);
+					timeChecker.start();
+					segmentDriver.print(0);
+				}
 				input = new int[++stage];
 
 				stageReady(stage);
@@ -251,7 +256,7 @@ public class MainActivity extends Activity {
 				if (!startCheck())
 					return;
 				boolean success = false;
-				timeChecker.Stop();
+				
 				for (int i = 0; i < stage; i++) {
 					if (input[i] != state[i]) {
 						break;
@@ -259,6 +264,9 @@ public class MainActivity extends Activity {
 					if (i == stage - 1) {
 						success = true;
 					}
+				}
+				if (timeChecker.stopped) {
+					success = false;
 				}
 				input = null;
 				state = null;
@@ -277,6 +285,7 @@ public class MainActivity extends Activity {
 					started = false;
 					return;
 				}
+				segmentDriver.print(score + 1);
 				clickNum = 0;
 				started = false;
 				Toast.makeText(getApplicationContext(),
@@ -317,6 +326,7 @@ public class MainActivity extends Activity {
 			return;
 		}
 	}
+
 
 	@Override
 	protected void onResume() {
