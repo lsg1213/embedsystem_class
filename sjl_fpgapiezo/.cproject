@@ -30,8 +30,8 @@
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.1086027334" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.103365964" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${eclipse_home}..\legacy\cygwin\platform\linux-s4412\include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${eclipse_home}..\legacy\cygwin\platform\linux-s4412\arch\arm\include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${eclipse_home}..\legacy\cygwin\platform\linux\include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${eclipse_home}..\legacy\cygwin\platform\linux\arch\arm\include&quot;"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.405128991" languageId="org.eclipse.cdt.core.gcc" languageName="GNU C" sourceContentType="org.eclipse.cdt.core.cSource,org.eclipse.cdt.core.cHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>

@@ -1,8 +1,8 @@
-cmd_/cygdrive/c/AndroXStudio/workspace/sjl_piezo/fpga_piezo.o := arm-linux-androideabi-gcc -Wp,-MD,/cygdrive/c/AndroXStudio/workspace/sjl_piezo/.fpga_piezo.o.d  -nostdinc -isystem /opt/toolchain-4.6.3/bin/../lib/gcc/arm-linux-androideabi/4.6.3/include -I/platform/linux/arch/arm/include  -Iarch/arm/include/generated -Iinclude    -include include/generated/autoconf.h      -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-exynos/include -Iarch/arm/plat-s5p/include -Iarch/arm/plat-samsung/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -ffast-math -Wno-format-security -fno-delete-null-pointer-checks -marm -march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp -O2 -marm -fno-dwarf2-cfi-asm -fno-omit-frame-pointer -mapcs -mno-sched-prolog -mabi=aapcs-linux -mno-thumb-interwork -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCC_HAVE_ASM_GOTO                             -DMODULE -DMODULE -mtune=cortex-a9 -march=armv7-a -mfpu=neon -fno-pic                            -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(fpga_piezo)"  -D"KBUILD_MODNAME=KBUILD_STR(fpga_piezo)" -c -o /cygdrive/c/AndroXStudio/workspace/sjl_piezo/fpga_piezo.o /cygdrive/c/AndroXStudio/workspace/sjl_piezo/fpga_piezo.c
+cmd_/cygdrive/c/AndroXStudio/workspace/sjl_fpgapiezo/sjl_fpgapiezo.o := arm-linux-androideabi-gcc -Wp,-MD,/cygdrive/c/AndroXStudio/workspace/sjl_fpgapiezo/.sjl_fpgapiezo.o.d  -nostdinc -isystem /opt/toolchain-4.6.3/bin/../lib/gcc/arm-linux-androideabi/4.6.3/include -I/platform/linux/arch/arm/include  -Iarch/arm/include/generated -Iinclude    -include include/generated/autoconf.h      -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-exynos/include -Iarch/arm/plat-s5p/include -Iarch/arm/plat-samsung/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -ffast-math -Wno-format-security -fno-delete-null-pointer-checks -marm -march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp -O2 -marm -fno-dwarf2-cfi-asm -fno-omit-frame-pointer -mapcs -mno-sched-prolog -mabi=aapcs-linux -mno-thumb-interwork -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCC_HAVE_ASM_GOTO                             -DMODULE -DMODULE -mtune=cortex-a9 -march=armv7-a -mfpu=neon -fno-pic                            -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(sjl_fpgapiezo)"  -D"KBUILD_MODNAME=KBUILD_STR(sjl_fpgapiezo)" -c -o /cygdrive/c/AndroXStudio/workspace/sjl_fpgapiezo/sjl_fpgapiezo.o /cygdrive/c/AndroXStudio/workspace/sjl_fpgapiezo/sjl_fpgapiezo.c
 
-source_/cygdrive/c/AndroXStudio/workspace/sjl_piezo/fpga_piezo.o := /cygdrive/c/AndroXStudio/workspace/sjl_piezo/fpga_piezo.c
+source_/cygdrive/c/AndroXStudio/workspace/sjl_fpgapiezo/sjl_fpgapiezo.o := /cygdrive/c/AndroXStudio/workspace/sjl_fpgapiezo/sjl_fpgapiezo.c
 
-deps_/cygdrive/c/AndroXStudio/workspace/sjl_piezo/fpga_piezo.o := \
+deps_/cygdrive/c/AndroXStudio/workspace/sjl_fpgapiezo/sjl_fpgapiezo.o := \
   include/linux/module.h \
     $(wildcard include/config/symbol/prefix.h) \
     $(wildcard include/config/sysfs.h) \
@@ -413,6 +413,6 @@ deps_/cygdrive/c/AndroXStudio/workspace/sjl_piezo/fpga_piezo.o := \
   include/linux/miscdevice.h \
   include/linux/major.h \
 
-/cygdrive/c/AndroXStudio/workspace/sjl_piezo/fpga_piezo.o: $(deps_/cygdrive/c/AndroXStudio/workspace/sjl_piezo/fpga_piezo.o)
+/cygdrive/c/AndroXStudio/workspace/sjl_fpgapiezo/sjl_fpgapiezo.o: $(deps_/cygdrive/c/AndroXStudio/workspace/sjl_fpgapiezo/sjl_fpgapiezo.o)
 
-$(deps_/cygdrive/c/AndroXStudio/workspace/sjl_piezo/fpga_piezo.o):
+$(deps_/cygdrive/c/AndroXStudio/workspace/sjl_fpgapiezo/sjl_fpgapiezo.o):

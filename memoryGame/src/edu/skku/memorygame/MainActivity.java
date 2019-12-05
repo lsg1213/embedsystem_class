@@ -7,8 +7,6 @@ import java.util.Comparator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -17,6 +15,7 @@ import edu.skku.memorygame_fpga7segment_jni.fpga7segmentJNIDriver;
 import edu.skku.memorygame_fpgadotmatrix_jni.fpgadotmatrixJNIDriver;
 import edu.skku.memorygame_fpgafullcolorled_jnidriver.fpgafullcolorledJNIDriver;
 import edu.skku.memorygame_fpgalcd_jnidriver.fpgalcdJNIDriver;
+import edu.skku.memorygame_fpgapiezo_jni.fpgapiezoJNIDriver;
 
 class ComparatorMyIntSort implements Comparator<Integer> {
 
@@ -35,7 +34,61 @@ public class MainActivity extends Activity {
 	public static final int SEND_INFORMATION = 0;
 	public static final int SEND_STOP = 1;
 	Thread thread;
+	final int NOTE_C6 = 0x1;
+	final int NOTE_CS6 = 0x31;
+	final int NOTE_D6 = 0x2;
+	final int NOTE_DS6 = 0x32;
+	final int NOTE_E6 = 0x3;
+	final int NOTE_F6 = 0x4;
+	final int NOTE_FS6 = 0x33;
+	final int NOTE_G6 = 0x5;
+	final int NOTE_GS6 = 0x34;
+	final int NOTE_A6 = 0x6;
+	final int NOTE_AS6 = 0x35;
+	final int NOTE_B6 = 0x7;
+	final int NOTE_C7 = 0x11;
+	final int NOTE_CS7 = 0x41;
+	final int NOTE_D7 = 0x12;
+	final int NOTE_DS7 = 0x42;
+	final int NOTE_E7 = 0x13;
+	final int NOTE_F7 = 0x14;
+	final int NOTE_FS7 = 0x43;
+	final int NOTE_G7 = 0x15;
+	final int NOTE_GS7 = 0x44;
+	final int NOTE_A7 = 0x16;
+	final int NOTE_AS7 = 0x45;
+	final int NOTE_B7 = 0x17;
+	final int NOTE_C8 = 0x21;
+	int melody[] = { NOTE_E7, NOTE_E7, 0, NOTE_E7, 0, NOTE_C7, NOTE_E7, 0,
+			NOTE_G7, 0, 0, 0, NOTE_G6, 0, 0, 0,
 
+			NOTE_C7, 0, 0, NOTE_G6, 0, 0, NOTE_E6, 0, 0, NOTE_A6, 0, NOTE_B6,
+			0, NOTE_AS6, NOTE_A6, 0,
+
+			NOTE_G6, NOTE_E7, NOTE_G7, NOTE_A7, 0, NOTE_F7, NOTE_G7, 0,
+			NOTE_E7, 0, NOTE_C7, NOTE_D7, NOTE_B6, 0, 0,
+
+			NOTE_C7, 0, 0, NOTE_G6, 0, 0, NOTE_E6, 0, 0, NOTE_A6, 0, NOTE_B6,
+			0, NOTE_AS6, NOTE_A6, 0,
+
+			NOTE_G6, NOTE_E7, NOTE_G7, NOTE_A7, 0, NOTE_F7, NOTE_G7, 0,
+			NOTE_E7, 0, NOTE_C7, NOTE_D7, NOTE_B6, 0, 0, NOTE_C7, NOTE_C8,
+			NOTE_A6, NOTE_A7, NOTE_AS6, NOTE_AS7, 0, 0, NOTE_C7, NOTE_C8,
+			NOTE_A6, NOTE_A7, NOTE_AS6, NOTE_AS7, 0, 0, NOTE_F6, NOTE_F7,
+			NOTE_D6, NOTE_D7, NOTE_DS6, NOTE_DS7, 0, 0, NOTE_F6, NOTE_F7,
+			NOTE_D6, NOTE_D7, NOTE_DS6, NOTE_DS7, 0, 0, NOTE_DS7, NOTE_CS7,
+			NOTE_D7, NOTE_CS7, NOTE_DS7, NOTE_DS7, NOTE_GS6, NOTE_G6, NOTE_CS7,
+			NOTE_C7, NOTE_FS7, NOTE_F7, NOTE_E6, NOTE_AS7, NOTE_A7, NOTE_GS7,
+			NOTE_DS7, NOTE_B6, NOTE_AS6, NOTE_A6, NOTE_GS6, 0, 0, 0 };
+
+	int tempo[] = { 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
+			12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
+			9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
+			12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9,
+			12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
+			12, 6, 3, 12, 12, 12, 12, 12, 12, 6, 3, 12, 12, 12, 12, 12, 12, 6,
+			3, 12, 12, 12, 12, 12, 12, 6, 6, 18, 18, 18, 6, 6, 6, 6, 6, 6, 18,
+			18, 18, 18, 18, 18, 10, 10, 10, 10, 10, 10, 3, 3, 3 };
 	Button start;
 	boolean started = false;
 	Button reset;
@@ -55,6 +108,7 @@ public class MainActivity extends Activity {
 	private fpgafullcolorledJNIDriver fullcolorledDriver = new fpgafullcolorledJNIDriver();
 	private fpgadotmatrixJNIDriver dotmatrixDriver = new fpgadotmatrixJNIDriver(); // dot
 	private fpga7segmentJNIDriver segmentDriver = new fpga7segmentJNIDriver();
+	private fpgapiezoJNIDriver piezoDriver = new fpgapiezoJNIDriver();
 	TimeCountThread timeChecker;
 	public boolean success;
 
@@ -74,7 +128,7 @@ public class MainActivity extends Activity {
 			state[i] = (int) (Math.random() * 4) + 1;
 		}
 		final int randomColor[] = { 0, 0, 0 };
-		
+
 		final int FULL_LED1 = 9;
 		final int FULL_LED2 = 8;
 		final int FULL_LED3 = 7;
@@ -118,14 +172,11 @@ public class MainActivity extends Activity {
 
 	public void stageReady(int stage) {
 		generateState(stage);
-		// Toast.makeText(getApplicationContext(),
-		// Arrays.toString(state).replaceAll("[^0-9]", ""),
-		// Toast.LENGTH_SHORT).show();
 	}
 
 	private void scoreboardSet() {
 		scoreBoard.add(score);
-		
+
 		Collections.sort(scoreBoard);
 		Collections.reverse(scoreBoard);
 		final String str1 = "1st: " + String.valueOf((int) scoreBoard.get(0));
@@ -162,8 +213,6 @@ public class MainActivity extends Activity {
 		reset = (Button) findViewById(R.id.reset);
 		submit = (Button) findViewById(R.id.submit);
 
-		
-		
 		start.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -175,6 +224,7 @@ public class MainActivity extends Activity {
 					timeChecker = new TimeCountThread();
 					timeChecker.setDaemon(true);
 					timeChecker.start();
+					timeChecker.songStart();
 					segmentDriver.print(0);
 				}
 				input = new int[++stage];
@@ -256,9 +306,10 @@ public class MainActivity extends Activity {
 				if (!startCheck())
 					return;
 				boolean success = false;
-				
+
 				for (int i = 0; i < stage; i++) {
 					if (input[i] != state[i]) {
+						timeChecker.Stop();
 						break;
 					}
 					if (i == stage - 1) {
@@ -298,20 +349,23 @@ public class MainActivity extends Activity {
 
 		int time = 30;
 		boolean stopped = false;
+		SongThread song;
 
 		public TimeCountThread() {
-			// TimeCountThread 를 등록할 때 쓰임
+			song = new SongThread();
 		}
-		
+
 		public void Stop() {
 			stopped = true;
+			song.Stop();
 		}
-		public void run() {
-			
-			while (time >= 0 && !stopped) {
 
-				// 시간을 1초 보낸다
-				
+		public void run() {
+
+			while (time >= 0 && !stopped) {
+				if (song.stopped) {
+					song.run();
+				}
 				timeDelay(1000);
 				dotmatrixDriver.DotMatrixControl(String.valueOf(time--));
 				if (success) {
@@ -319,6 +373,12 @@ public class MainActivity extends Activity {
 				}
 			}
 		}
+
+		public void songStart() {
+			song.setDaemon(true);
+			song.start();
+		}
+
 		private void timeDelay(long mill) {
 			long st = System.currentTimeMillis();
 			while (System.currentTimeMillis() <= st + mill || success)
@@ -327,6 +387,40 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	class SongThread extends Thread {
+
+		boolean stopped = false;
+
+		public SongThread() {
+		}
+
+		public void Stop() {
+			stopped = true;
+		}
+
+		public void run() {
+			while (!stopped) {
+				int size = melody.length;
+				for (int thisNote = 0; thisNote < size; thisNote++) {
+					if (stopped)
+						break;
+					int noteDuration = 1500 / tempo[thisNote];
+
+					piezoDriver.write((char) melody[thisNote]);
+					long pauseBetweenNotes = (long) (noteDuration * 1.30);
+					try {
+						Thread.sleep(pauseBetweenNotes);
+					} catch (Exception e) {
+
+					}
+					piezoDriver.write((char) 0);
+				}
+				if (stopped)
+					break;
+			}
+
+		}
+	}
 
 	@Override
 	protected void onResume() {
@@ -335,6 +429,7 @@ public class MainActivity extends Activity {
 			Toast.makeText(MainActivity.this, "LED_Driver Open Failed",
 					Toast.LENGTH_SHORT).show();
 		segmentDriver.open();
+		piezoDriver.open();
 		super.onResume();
 	}
 
@@ -343,6 +438,7 @@ public class MainActivity extends Activity {
 		lcdDriver.off();
 		fullcolorledDriver.close();
 		segmentDriver.close();
+		piezoDriver.close();
 		super.onPause();
 	}
 
