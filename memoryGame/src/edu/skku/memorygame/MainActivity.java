@@ -317,6 +317,7 @@ public class MainActivity extends Activity {
 					}
 				}
 				if (timeChecker.stopped) {
+					Toast.makeText(getApplicationContext(), "Time Over", Toast.LENGTH_SHORT);
 					success = false;
 				}
 				input = null;
